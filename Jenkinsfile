@@ -58,7 +58,7 @@ pipeline {
           def uploadSpec = """{
             "files": [
               {
-                "pattern": "target/my-app*.jar",
+                "pattern": "target/*.jar",
                 "target": "Grotadmorv/rondoudou${BUILD_NUMBER}.jar"
               }
             ]
