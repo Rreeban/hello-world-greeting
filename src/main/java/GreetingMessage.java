@@ -25,5 +25,5 @@ public class GreetingMessage {
      public String printMessage(){
         System.out.println(message);
         return message;
-     }   
+    }   
   } 
