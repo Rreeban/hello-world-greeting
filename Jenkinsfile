@@ -59,7 +59,7 @@ pipeline {
             "files": [
               {
                 "pattern": "target/*.war",
-                "target": "Grotadmorv/rondoudou${BUILD_NUMBER}.jar"
+                "target": "depot_jenkins/rondoudou${BUILD_NUMBER}.jar"
               }
             ]
           }"""
