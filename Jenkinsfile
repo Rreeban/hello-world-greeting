@@ -79,10 +79,10 @@ pipeline {
         
           def server = Artifactory.server('Artifactory')
           def downloadSpec = """{
-            "files" : [
+            "files": [
               {
-                "pattern" : "depot_jenkins/rondoudou4.jar"
-                "target" : "/home/jenkins"
+                "pattern": "depot_jenkins/rondoudou4.jar"
+                "target": "/home/jenkins"
               }
             ]
           }"""
