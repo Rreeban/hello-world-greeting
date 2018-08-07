@@ -86,6 +86,7 @@ pipeline {
               }
             ]
           }"""
+          server.download(downloadSpec)
        
         }
         
