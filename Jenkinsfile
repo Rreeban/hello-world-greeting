@@ -82,7 +82,7 @@ pipeline {
             "files": [
               {
                 "pattern": "depot_jenkins/rondoudou4.jar",
-                "target": "/home/jenkins"
+                "target": "/home/jenkins/rondoudou.jar"
               }
             ]
           }"""
