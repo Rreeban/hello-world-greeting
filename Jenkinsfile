@@ -98,8 +98,7 @@ pipeline {
       
       steps {
         
-        sh '''cd /opt/jmeter/bin
-        ./jmeter.sh -n -t $WORKSPACE/pt/jmeter.jmx -l $WORKSPACE/test_report.jtl''';
+        sh '/home/jenkins/jmeter/bin/jmeter.sh -n -t $WORKSPACE/pt/jmeter.jmx -l $WORKSPACE/test_report.jtl'
         
       }
       
