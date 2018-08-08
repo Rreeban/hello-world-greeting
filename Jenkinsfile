@@ -94,6 +94,17 @@ pipeline {
     
     }
     
+    stage ('test de performance') {
+      
+      steps {
+        
+        sh '''cd /opt/jmeter/bin
+        ./jmeter.sh -n -t $WORKSPACE/pt/jmeter.jmx -l $WORKSPACE/test_report.jtl''';
+        
+      }
+      
+    }
+    
   }
   
 }
