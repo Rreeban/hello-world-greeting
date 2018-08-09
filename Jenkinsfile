@@ -106,12 +106,16 @@ pipeline {
     
     stage ('Mise à jour de l\'objet dans Artifactory') {
       
-      script {
+      steps {
+      
+        script {
         
-        withCredentials([usernameColonPassword(credentialsId: 'artifactory', variable: 'credentials')]) {
-          sh 'curl -u${credentials} -X PUT "http://84.39.47.48:8081/artifactory/api/storage/example-project/${BUILD_NUMBER}/hello-0.0.1.war?properties=Performance-Tested=Yes"';
+          withCredentials([usernameColonPassword(credentialsId: 'artifactory', variable: 'credentials')]) {
+            sh 'curl -u${credentials} -X PUT "http://84.39.47.48:8081/artifactory/api/storage/example-project/${BUILD_NUMBER}/hello-0.0.1.war?properties=Performance-Tested=Yes"';
+          }
+        
         }
-        
+          
       }
       
     }
