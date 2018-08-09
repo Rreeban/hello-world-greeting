@@ -94,7 +94,7 @@ pipeline {
                 "files": [
                   {
                     "pattern": "depot_jenkins/rondoudou${BUILD_NUMBER}.jar",
-                    "target": "/home/jenkins/rondoudou.jar"
+                    "target": "/home/jenkins/tomcat/webapps/rondoudou.jar"
                   }
                 ]
               }"""
