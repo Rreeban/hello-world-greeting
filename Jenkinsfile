@@ -81,7 +81,7 @@ pipeline {
           def downloadSpec = """{
             "files": [
               {
-                "pattern": "depot_jenkins/rondoudou4.jar",
+                "pattern": "depot_jenkins/rondoudou${BUILD_NUMBER}.jar",
                 "target": "/home/jenkins/rondoudou.jar"
               }
             ]
