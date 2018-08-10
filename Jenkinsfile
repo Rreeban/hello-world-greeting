@@ -114,7 +114,7 @@ pipeline {
       
         }
         
-        stage ('Placement dans le dépot livrable') {
+        stage ('Placement dans le dépôt livrable') {
           
           steps {
             
@@ -140,43 +140,7 @@ pipeline {
       }
   
     }
-    
-    stage ('Deploiement') {
-
-      agent {
-        label 'Production'
-      }
-      
-      steps {
-      
-        script {
-        
-          def server = Artifactory.server('Artifactory')
-          def promotionConfig = [
-            // Mandatory parameters
-            'buildName'          : "rondoudou${BUILD_NUMBER}.jar",
-            'buildNumber'        : '4',
-            'targetRepo'         : 'depot_jenkins',
-
-            // Optional parameters
-            'comment'            : 'this is the promotion comment',
-            'sourceRepo'         : 'hello_livrable',
-            'status'             : 'Released',
-            'includeDependencies': true,
-            'copy'               : true,
-            // 'failFast' is true by default.
-            // Set it to false, if you don't want the promotion to abort upon receiving the first error.
-            'failFast'           : true
-          ]
-       
-          server.promote promotionConfig
-          
-        }
-          
-      }
-      
-    }
-
+   
   }
-  
+
 }
