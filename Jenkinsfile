@@ -113,28 +113,70 @@ pipeline {
           }
       
         }
-    
-        stage ('Deploiement') {
-      
-          steps {
-      
-            script {
         
-              //Télécharger le binaire sur une autre machine.
-              withCredentials([usernameColonPassword(credentialsId: 'artifactory', variable: 'credentials')]) {
-                sh 'curl -u${credentials} -X PUT "http://84.39.47.48:8081/artifactory/api/storage/example-project/${BUILD_NUMBER}/hello-0.0.1.war?properties=Performance-Tested=Yes"';
-              }
-        
-            }
+        stage ('Placement dans le dépot livrable') {
           
+          steps {
+            
+            script {
+
+              def server = Artifactory.server('Artifactory')
+              def uploadSpec = """{
+                "files": [
+                  {
+                    "pattern": "target/*.war",
+                    "target": "hello_livrable/rondoudou${BUILD_NUMBER}.jar"
+                  }
+                ]
+              }"""
+              server.upload(uploadSpec)
+
+            }
+            
           }
-      
+          
         }
     
       }
   
     }
     
+    stage ('Deploiement') {
+
+      agent {
+        label 'Production'
+      }
+      
+      steps {
+      
+        script {
+        
+          def server = Artifactory.server('Artifactory')
+          def promotionConfig = [
+            // Mandatory parameters
+            'buildName'          : "rondoudou${BUILD_NUMBER}.jar",
+            'buildNumber'        : '4',
+            'targetRepo'         : 'depot_jenkins',
+
+            // Optional parameters
+            'comment'            : 'this is the promotion comment',
+            'sourceRepo'         : 'hello_livrable',
+            'status'             : 'Released',
+            'includeDependencies': true,
+            'copy'               : true,
+            // 'failFast' is true by default.
+            // Set it to false, if you don't want the promotion to abort upon receiving the first error.
+            'failFast'           : true
+          ]
+       
+          server.promote promotionConfig
+          
+        }
+          
+      }
+      
+    }
+
   }
   
 }
