@@ -32,7 +32,7 @@ pipeline {
       
         }
     
-        stage('Test unitaire & publication') {
+        stage('Tests & publication') {
     
           steps {
             sh 'mvn test'
