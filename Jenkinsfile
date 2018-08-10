@@ -15,10 +15,10 @@ pipeline {
         stage('Compilation') {
     
           steps {
-            //sh 'mvn -B -DskipTests clean package'
-            sh 'mvn clean verify -DskipITs=true';
-            junit '**/target/surefire-reports/TEST-*.xml'
-            archive 'target/*.jar'
+            sh 'mvn -B -DskipTests clean package'
+            //sh 'mvn clean verify -DskipITs=true';
+            //junit '**/target/surefire-reports/TEST-*.xml'
+            //archive 'target/*.jar'
           }
       
         }
@@ -35,21 +35,21 @@ pipeline {
       
         }
     
-        //stage('Test unitaire & publication') {
+        stage('Test unitaire & publication') {
     
-          //steps {
-            //sh 'mvn test'
-          //}
+          steps {
+            sh 'mvn test'
+          }
       
-          //post {
+          post {
       
-            //always {
-              //junit 'target/surefire-reports/*.xml'
-            //}
+            always {
+              junit 'target/surefire-reports/*.xml'
+            }
         
-          //}
+          }
       
-        //}
+        }
     
         stage ('Publication du binaire') {
 
