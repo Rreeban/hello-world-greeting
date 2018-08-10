@@ -124,7 +124,7 @@ pipeline {
               def uploadSpec = """{
                 "files": [
                   {
-                    "pattern": "target/*.war",
+                    "pattern": "/home/jenkins/tomcat/webapps/rondoudou.jar",
                     "target": "hello_livrable/rondoudou${BUILD_NUMBER}.jar"
                   }
                 ]
