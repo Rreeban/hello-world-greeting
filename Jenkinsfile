@@ -125,7 +125,7 @@ pipeline {
                 "files": [
                   {
                     "pattern": "/home/jenkins/tomcat/webapps/rondoudou.jar",
-                    "target": "hello_livrable/rondoudou${BUILD_NUMBER}.jar"
+                    "target": "hello_livrable/derniere_version.jar"
                   }
                 ]
               }"""
