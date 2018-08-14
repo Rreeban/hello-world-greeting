@@ -131,7 +131,7 @@ pipeline {
               }"""
               server.upload(uploadSpec)
               
-              def uploadSpec = """{
+              def uploadSpec_2 = """{
                 "files": [
                   {
                     "pattern": "/home/jenkins/tomcat/webapps/rondoudou.jar",
@@ -139,7 +139,7 @@ pipeline {
                   }
                 ]
               }"""
-              server.upload(uploadSpec)
+              server.upload(uploadSpec_2)
 
             }
             
