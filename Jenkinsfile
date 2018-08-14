@@ -114,7 +114,7 @@ pipeline {
       
         }
         
-        stage ('Placement dans le dépôt livrable') {
+        stage ('Validation de l\'application') {
           
           steps {
             
@@ -125,7 +125,17 @@ pipeline {
                 "files": [
                   {
                     "pattern": "/home/jenkins/tomcat/webapps/rondoudou.jar",
-                    "target": "hello_livrable/derniere_version.jar"
+                    "target": "hello_livrable/rondoudou_fiable${BUILD_NUMBER}.jar"
+                  }
+                ]
+              }"""
+              server.upload(uploadSpec)
+              
+              def uploadSpec = """{
+                "files": [
+                  {
+                    "pattern": "/home/jenkins/tomcat/webapps/rondoudou.jar",
+                    "target": "hello_livrable/dernier_rondoudou_fiable.jar"
                   }
                 ]
               }"""
@@ -141,6 +151,6 @@ pipeline {
   
     }
    
-  }
+  }     
 
 }
