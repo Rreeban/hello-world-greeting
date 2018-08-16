@@ -144,7 +144,7 @@ pipeline {
     stage (‘Déploiement’) {
 
       agent {
-        label ‘Production’
+        label 'Production'
       }
 
       steps {
