@@ -52,7 +52,7 @@ pipeline {
 
       steps {
 
-        sh "curl -u admin:Shaymin122 --upload-file target/test_maven-1.0-SNAPSHOT.jar 'http://84.39.42.17:8081/repository/depot_test/'"
+        sh "curl -u admin:Shaymin122 --upload-file test_maven-1.0-SNAPSHOT.jar 'http://84.39.42.17:8081/repository/depot_test/'"
 
       }
 
