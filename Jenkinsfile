@@ -141,7 +141,7 @@ pipeline {
 
     }
 
-    stage (‘Déploiement’) {
+    stage ('Déploiement') {
 
       agent {
         label 'Production'
