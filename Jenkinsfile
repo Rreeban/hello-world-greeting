@@ -52,7 +52,7 @@ pipeline {
 
       steps {
 
-        nexusPublisher nexusInstanceId: 'Nexus_jenkins', nexusRepositoryId: 'depot_maven_test', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'target/*.jar']], mavenCoordinate: [artifactId: 'rondoudou', groupId: 'test', packaging: 'pok', version: '1.09']]]
+        nexusPublisher nexusInstanceId: 'Nexus_jenkins', nexusRepositoryId: 'depot_maven_test', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'target/*.war']], mavenCoordinate: [artifactId: 'rondoudou', groupId: 'test', packaging: 'pok', version: '1.09']]]
 
       }
 
