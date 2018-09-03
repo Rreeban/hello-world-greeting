@@ -52,8 +52,7 @@ pipeline {
 
       steps {
 
-        nexusPublisher nexusInstanceId: 'Nexus_jenkins', nexusRepositoryId: 'depot_maven_test', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: 'target/*.war']], mavenCoordinate: [artifactId: 'rondoudou', groupId: 'test', packaging: 'pok', version: '1.09']]]
-
+         curl -u admin:Shaymin122 --upload-file target/*war 'http://84.39.42.17:8081/repository/depot_test/'
       }
 
     }
