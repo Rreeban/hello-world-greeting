@@ -52,7 +52,7 @@ pipeline {
 
       steps {
 
-         sh "curl -u admin:Shaymin122 --upload-file target/*war 'http://84.39.42.17:8081/repository/depot_test/'"
+        sh "curl -u admin:Shaymin122 --upload-file target/*war -o rondoudou${BUILD_NUMBER}.war 'http://84.39.42.17:8081/repository/depot_test/'"
       }
 
     }
