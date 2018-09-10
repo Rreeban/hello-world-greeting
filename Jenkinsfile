@@ -11,7 +11,7 @@ pipeline {
    stage('test') {
      
      steps {
-       sh 'http://mirrors.ircam.fr/pub/apache/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz'
+       sh 'wget http://mirrors.ircam.fr/pub/apache/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz'
      }
      
    }
