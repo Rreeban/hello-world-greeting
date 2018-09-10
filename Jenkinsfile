@@ -7,21 +7,11 @@ pipeline {
  // }
   
  stages {
- 
-   stage('test') {
-     
-     steps {
-       sh 'wget http://mirrors.ircam.fr/pub/apache/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz'
-     }
-     
-   }
    
     stage('Compilation') {
     
       steps {
-      
         sh 'mvn -B -DskipTests clean package'
-        
       }
       
     }
@@ -41,17 +31,13 @@ pipeline {
     stage('Test unitaire & publication') {
     
       steps {
-      
         sh 'mvn test'
-        
       }
       
       post {
       
-        always {
-        
+        always {  
           junit 'target/surefire-reports/*.xml'
-          
         }
         
       }
@@ -61,9 +47,7 @@ pipeline {
     stage ('Publication du binaire') {
 
       steps {
-
         sh "curl -u admin:Shaymin122 --upload-file target/*war 'http://84.39.42.17:8081/repository/depot_test/rondoudou${BUILD_NUMBER}.war'"
-        
       }
 
     }
