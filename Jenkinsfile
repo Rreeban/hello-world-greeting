@@ -1,8 +1,10 @@
 pipeline {
 
-  agent {
-    label 'Linux'
-  }
+  agent any
+  
+ // agent {
+ //   label 'Linux'
+ // }
 
   stages {
   
