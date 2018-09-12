@@ -1,10 +1,8 @@
 pipeline {
-
-  agent any
   
- // agent {
- //   label 'Linux'
- // }
+ agent {
+   label 'docker_java'
+ }
   
  stages {
    
