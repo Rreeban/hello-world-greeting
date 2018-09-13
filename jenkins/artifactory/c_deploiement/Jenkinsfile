@@ -20,7 +20,7 @@ pipeline {
       
         }
     
-        stage('Analyse statique avec SonarQube') {
+        stage('Analyse statique') {
       
           steps {
         
@@ -115,9 +115,9 @@ pipeline {
         }
         
         stage ('Validation de l\'application') {
-          
+
           steps {
-            
+
             script {
 
               def server = Artifactory.server('Artifactory')
@@ -130,27 +130,44 @@ pipeline {
                 ]
               }"""
               server.upload(uploadSpec)
-              
-              def uploadSpec_2 = """{
-                "files": [
-                  {
-                    "pattern": "/home/jenkins/tomcat/webapps/rondoudou.jar",
-                    "target": "hello_livrable/dernier_rondoudou_fiable.jar"
-                  }
-                ]
-              }"""
-              server.upload(uploadSpec_2)
 
             }
-            
-          }
-          
-        }
-    
-      }
-  
-    }
-   
-  }     
 
+          }
+
+        }
+
+      }
+
+    }
+
+    stage ('Déploiement') {
+
+      agent {
+        label 'Production'
+      }
+
+      steps {
+
+        script {
+
+          def server = Artifactory.server('Artifactory')
+          def downloadSpec = """{
+            "files": [
+              {
+                "pattern": "hello_fiable/rondoudou_fibale${BUILD_NUMBER}.jar",
+                "target": "/home/jenkins/tomcat/webapps/rondoudou_fiable.war"
+              }
+            ]
+          }"""
+          server.download(downloadSpec)
+
+        }
+
+      }
+
+    }
+            
+  }
+          
 }

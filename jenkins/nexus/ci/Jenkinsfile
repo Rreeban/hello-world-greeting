@@ -14,7 +14,7 @@ pipeline {
       
     }
     
-    stage('Analyse statique avec SonarQube') {
+    stage('Analyse statique') {
       
       steps {
         
