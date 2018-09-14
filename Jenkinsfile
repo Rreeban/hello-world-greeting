@@ -45,7 +45,7 @@ pipeline {
     stage('Publication du binaire') {
       
       steps {
-        sh "curl -u admin:password --upload-file target/*war 'http://{URL_DU_SERVEUR_NEXUS}/repository/depot_test/rondoudou${BUILD_NUMBER}.war'"
+        sh "curl -u admin:Shaymin122 --upload-file target/*war 'http://{URL_DU_SERVEUR_NEXUS}/repository/depot_test/rondoudou${BUILD_NUMBER}.war'"
       }
       
     }
