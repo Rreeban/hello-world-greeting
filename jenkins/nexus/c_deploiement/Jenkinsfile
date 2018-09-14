@@ -136,13 +136,23 @@ pipeline {
     
     stage('deploiement') {
       
-      agent{
-        label 'docker_deploiement'
-      }
+      stages {
       
-      steps {
-        sh 'sudo docker pull reeban/trez'
-      }
+        agent{
+          label 'docker_deploiement'
+        }
+        
+        stage('arret image')
+        
+        stage('Téléchargement image') {
+      
+          steps {
+            sh 'sudo docker pull reeban/trez'
+          }
+        
+        }
+        
+        
       
     }
     
