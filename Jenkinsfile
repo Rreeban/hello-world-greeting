@@ -1,55 +1,139 @@
 pipeline {
   
-  agent {
-    label 'docker_java'
-  }
+  agent none
   
   stages {
     
-    stage('Compilation') {
-      
-      steps {
-        sh 'mvn -B -DskipTests clean package'
+    stage('Compilation et tests') {
+  
+      agent {
+        label 'docker_java'
       }
-      
-    }
-      
-    stage('Analyse statique') {
-        
-      steps {
-          
-        withSonarQubeEnv('SonarQube') {
-          sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
-        }
-          
-      }
-        
-    }
     
-    stage('Test unitaire & publication') {
-      
-      steps {
-        sh 'mvn test'
-      }
-      
-      post {
+      stages {
         
-        always {
-          junit 'target/surefire-reports/*.xml'
+        stage('Compilation') {
+      
+          steps {
+            sh 'mvn -B -DskipTests clean package'
+          }
+          
         }
         
+        stage('Analyse statique') {
+      
+          steps {
+        
+            withSonarQubeEnv('SonarQube') {
+              sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
+            }
+        
+          }
+      
+        }
+    
+        stage('Test unitaire & publication') {
+      
+          steps {
+            sh 'mvn test'
+          }
+      
+          post {
+        
+            always {
+              junit 'target/surefire-reports/*.xml'
+            }
+        
+          }
+     
+        }
+    
+        stage('Publication du binaire') {
+      
+          steps {
+            sh "curl -u admin:password --upload-file target/*war 'http://localhost:8081/repository/depot_test/rondoudou${BUILD_NUMBER}.jar'" 
+          }
+      
+        }
+        
       }
       
     }
     
-    stage('Publication du binaire') {
+    stage('Tests de déploiement') {
       
-      steps {
-        sh "curl -u admin:Shaymin122 --upload-file target/*war 'http://84.39.42.17:8081/repository/depot_test/rondoudou${BUILD_NUMBER}.war'"
+      agent {
+        label 'docker_tomcat'
       }
       
+      stages {
+        
+        stage('Téléchargement du binaire') {
+          
+          steps {
+            sh "wget http://localhost:8081/repository/depot_test/rondoudou${BUILD_NUMBER}.jar"
+          }
+          
+        }
+        
+        stage('Test de performance') {
+          
+          steps {
+            sh '/home/jenkins/jmeter/bin/jmeter.sh -n -t $WORKSPACE/pt/jmeter.jmx -l /home/jenkins/test_report.jtl'
+          }
+          
+        }
+        
+        stage('Validation de l\'application') {
+          
+          steps {
+            sh "curl -u admin:password --upload-file /home/jenkins/tomcat/webapps/rondoudou.jar 'http://localhost:8081/repository/hello_fiable/rondoudou_fiable${BUILD_NUMBER}.jar'"
+            sh "curl -u admin:password --upload-file /home/jenkins/tomcat/webapps/rondoudou.jar 'http://localhost:8081/repository/hello_livrable/dernier_rondoudou_fiable.jar'"
+          }
+          
+        }
+        
+      }
+      
+    }
+    
+    stage('Creation de l\'image') {
+      
+      agent {
+        label 'docker'
+      }
+      
+      stages {
+        
+        stage('Téléchargement du binaire') {
+          
+          steps {
+            sh 'wget http://localhost:8081/repository/hello_livrable/dernier_rondoudou_fiable.jar'
+          }
+          
+        }
+            
+        stage('Compilation de l\'image') {
+      
+          steps {
+            sh 'sudo docker build -t tomcat_app docker/agent_java/Dockerfile'
+          }
+          
+        }
+        
+        stage('Stockage de l\'image) {
+              
+          steps {
+            sh 'sudo docker tag tomcat_app reeban/trez:0.0'
+            sh 'sudo docker push reeban/trez:0.0'
+          }
+              
+        }
+              
+      }
+              
     }
     
   }
-      
-} 
+  
+}
