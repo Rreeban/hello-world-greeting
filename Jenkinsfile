@@ -121,7 +121,7 @@ pipeline {
           
         }
         
-        stage('Stockage de l\'image) {
+        stage('Stockage de l\'image') {
               
           steps {
             sh 'sudo docker tag tomcat_app reeban/trez:0.0'
