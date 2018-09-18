@@ -116,7 +116,7 @@ pipeline {
         stage('Compilation de l\'image') {
       
           steps {
-            sh 'sudo docker build -t tomcat_app docker/agent_java/Dockerfile'
+            sh 'sudo docker build -t tomcat_app /home/jenkins/docker/tomcat_app/Dockerfile'
           }
           
         }
