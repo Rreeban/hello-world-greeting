@@ -116,7 +116,7 @@ pipeline {
         stage('Compilation de l\'image') {
       
           steps {
-            sh 'sudo docker build -t tomcat_app /home/jenkins/docker/tomcat_app/Dockerfile'
+            sh 'docker build -t tomcat_app /home/jenkins/docker/tomcat_app/Dockerfile'
           }
           
         }
@@ -124,8 +124,8 @@ pipeline {
         stage('Stockage de l\'image') {
               
           steps {
-            sh 'sudo docker tag tomcat_app reeban/trez:0.0'
-            sh 'sudo docker push reeban/trez:0.0'
+            sh 'docker tag tomcat_app reeban/trez:0.0'
+            sh 'docker push reeban/trez:0.0'
           }
               
         }
