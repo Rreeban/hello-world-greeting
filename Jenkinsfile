@@ -88,8 +88,8 @@ pipeline {
         stage('Validation de l\'application') {
           
           steps {
-            sh "curl -u admin:Shaymin122 --upload-file /home/jenkins/tomcat/webapps/rondoudou.jar 'http://84.39.42.17:8081/repository/hello_fiable/rondoudou_fiable${BUILD_NUMBER}.jar'"
-            sh "curl -u admin:Shaymin122 --upload-file /home/jenkins/tomcat/webapps/rondoudou.jar 'http://84.39.42.17:8081/repository/hello_livrable/dernier_rondoudou_fiable.jar'"
+            sh "curl -u admin:Shaymin122 --upload-file /home/jenkins/tomcat/webapps/rondoudou.war 'http://84.39.42.17:8081/repository/hello_fiable/rondoudou_fiable${BUILD_NUMBER}.jar'"
+            sh "curl -u admin:Shaymin122 --upload-file /home/jenkins/tomcat/webapps/rondoudou.war 'http://84.39.42.17:8081/repository/hello_livrable/dernier_rondoudou_fiable.jar'"
           }
           
         }
