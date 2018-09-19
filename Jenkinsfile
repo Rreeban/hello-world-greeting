@@ -108,7 +108,8 @@ pipeline {
         stage('Téléchargement du binaire') {
           
           steps {
-            sh 'wget -P /home/jenkins/docker/tomcat_app/rondoudou.war http://84.39.42.17:8081/repository/hello_livrable/dernier_rondoudou_fiable.jar'
+            sh 'wget -P /home/jenkins/docker/tomcat_app http://84.39.42.17:8081/repository/hello_livrable/dernier_rondoudou_fiable.jar'
+            sh 'mv /home/jenkins/docker/tomcat_app/dernier_rondoudou_fiable.jar /home/jenkins/docker/tomcat_app/rondoudou.war'
           }
           
         }
