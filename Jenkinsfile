@@ -71,7 +71,8 @@ pipeline {
         stage('Téléchargement du binaire') {
           
           steps {
-            sh "wget -P /home/jenkins/tomcat/webapps/rondoudou.jar http://84.39.42.17:8081/repository/depot_test/rondoudou${BUILD_NUMBER}.jar"
+            sh "wget -P /home/jenkins/tomcat/webapps http://84.39.42.17:8081/repository/depot_test/rondoudou${BUILD_NUMBER}.jar"
+            sh "mv rondoudou${BUILD_NUMBER}.jar rondoudou.war"
           }
           
         }
