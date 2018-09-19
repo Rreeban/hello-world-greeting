@@ -72,7 +72,7 @@ pipeline {
           
           steps {
             sh "wget -P /home/jenkins/tomcat/webapps http://84.39.42.17:8081/repository/depot_test/rondoudou${BUILD_NUMBER}.jar"
-            sh "mv rondoudou${BUILD_NUMBER}.jar rondoudou.war"
+            sh "mv /home/jenkins/tomcat/webapps/rondoudou${BUILD_NUMBER}.jar /home/jenkins/tomcat/webapps/rondoudou.war"
           }
           
         }
