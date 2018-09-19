@@ -124,9 +124,11 @@ pipeline {
         stage('Stockage de l\'image') {
               
           steps {
-            sh 'docker tag tomcat_app reeban/trez:0.0'
+            sh "docker tag tomcat_app reeban/trez:${BUILD_NUMBER}"
+            sh 'docker tag tomcat_app reeban/trez'
             sh 'docker login -u reeban -p Shaymin122'
-            sh 'docker push reeban/trez:0.0'
+            sh "docker push reeban/trez:${BUILD_NUMBER}"
+            sh 'docker push reeban/trez'
           }
               
         }
