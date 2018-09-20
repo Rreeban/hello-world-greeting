@@ -139,6 +139,30 @@ pipeline {
               
     }
     
+    stage('Déploiement') {
+      
+      agent {
+        label 'production_docker'
+      }
+    
+      stages {
+        
+        stage ('Mise en production') {
+            
+          steps {
+                
+            sh 'docker pull reeban/trez'
+            sh 'docker rm -f test'
+            sh 'docker run -d -p 8080:8080 --name="test" reeban/trez'
+                
+          }
+    
+        }
+
+      }
+    
+    }
+    
   }
   
 }
