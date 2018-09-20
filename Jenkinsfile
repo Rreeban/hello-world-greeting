@@ -51,7 +51,7 @@ pipeline {
         stage('Publication du binaire') {
       
           steps {
-            sh "curl -u admin:Shaymin122 --upload-file target/*war 'http://84.39.42.17:8081/repository/depot_test/rondoudou${BUILD_NUMBER}.jar'" 
+            sh "curl -u admin:password --upload-file target/*war 'http://84.39.42.17:8081/repository/depot_test/rondoudou${BUILD_NUMBER}.jar'" 
           }
       
         }
@@ -88,8 +88,8 @@ pipeline {
         stage('Validation de l\'application') {
           
           steps {
-            sh "curl -u admin:Shaymin122 --upload-file /home/jenkins/tomcat/webapps/rondoudou.war 'http://84.39.42.17:8081/repository/hello_fiable/rondoudou_fiable${BUILD_NUMBER}.jar'"
-            sh "curl -u admin:Shaymin122 --upload-file /home/jenkins/tomcat/webapps/rondoudou.war 'http://84.39.42.17:8081/repository/hello_livrable/dernier_rondoudou_fiable.jar'"
+            sh "curl -u admin:password --upload-file /home/jenkins/tomcat/webapps/rondoudou.war 'http://84.39.42.17:8081/repository/hello_fiable/rondoudou_fiable${BUILD_NUMBER}.jar'"
+            sh "curl -u admin:password --upload-file /home/jenkins/tomcat/webapps/rondoudou.war 'http://84.39.42.17:8081/repository/hello_livrable/dernier_rondoudou_fiable.jar'"
           }
           
         }
@@ -128,7 +128,7 @@ pipeline {
           steps {
             sh "docker tag tomcat_app reeban/trez:${BUILD_NUMBER}"
             sh 'docker tag tomcat_app reeban/trez'
-            sh 'docker login -u reeban -p Shaymin122'
+            sh 'docker login -u reeban -p password'
             sh "docker push reeban/trez:${BUILD_NUMBER}"
             sh 'docker push reeban/trez'
           }
