@@ -1,7 +1,7 @@
 pipeline {
 
   agent {
-    label 'Linux'
+    label 'agent_java'
   }
 
   stages {
@@ -14,10 +14,9 @@ pipeline {
       
     }
     
-    stage('Analyse statique avec SonarQube') {
+    stage('Analyse statique') {
       
-      steps {
- 
+      steps { 
         withSonarQubeEnv('SonarQube') {
           sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
         }
@@ -29,12 +28,12 @@ pipeline {
     stage('Test unitaire & publication') {
     
       steps {
-        sh 'mvn test'        
+        sh 'mvn test'
       }
       
       post {
       
-        always {        
+        always { 
           junit 'target/surefire-reports/*.xml'
         }
         
@@ -45,7 +44,7 @@ pipeline {
     stage ('Publication du binaire') {
 
       steps {
-        sh "curl -u admin:Shaymin122 --upload-file target/*war 'http://84.39.43.46:8081/repository/depot_test/rondoudou${BUILD_NUMBER}.jar'"
+        sh "curl -u admin:Shaymin122 --upload-file target/*war 'http://84.39.43.46:8081/repository/depot_test/rondoudou${BUILD_NUMBER}.war'"
       }
 
     }
