@@ -5,11 +5,19 @@ pipeline {
   }
 
   stages {
-  
-    stage('Compilation') {
+      
+    stage('Test unitaire & publication') {
     
       steps {
-        sh 'mvn -B -DskipTests clean package'
+        sh 'mvn test'
+      }
+      
+      post {
+      
+        always { 
+          junit 'target/surefire-reports/*.xml'
+        }
+        
       }
       
     }
@@ -25,18 +33,10 @@ pipeline {
       
     }
     
-    stage('Test unitaire & publication') {
+    stage('Compilation') {
     
       steps {
-        sh 'mvn test'
-      }
-      
-      post {
-      
-        always { 
-          junit 'target/surefire-reports/*.xml'
-        }
-        
+        sh 'mvn -B -DskipTests clean package'
       }
       
     }
