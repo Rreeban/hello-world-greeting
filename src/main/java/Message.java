@@ -2,6 +2,6 @@ package hello;
 
 public class Message {
 	public String sayHello() {
-		return "Hello Warld";
+		return "Hello World";
 	}
 }
