@@ -45,7 +45,7 @@ pipeline {
     stage ('Publication du binaire') {
 
       steps {
-        sh "curl -u admin:Shaymin122 --upload-file target/*war 'http://84.39.43.46/repository/depot_test/rondoudou${BUILD_NUMBER}.war'"
+        sh "curl -u admin:Shaymin122 --upload-file target/*jar 'http://84.39.43.46/repository/depot_test/rondoudou${BUILD_NUMBER}.jar'"
       }
 
     }
