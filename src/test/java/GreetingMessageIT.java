@@ -16,13 +16,13 @@ public class GreetingMessageIT {
    	GregorianCalendar time = new GregorianCalendar();
  	int hour = time.get(Calendar.HOUR_OF_DAY);
 	if (hour < 12)
-    this.message = "Good Morning?";
+    this.message = "Good Morning!";
     else if (hour < 17 && !(hour == 12))
-    this.message = "Good Afternoon?";
+    this.message = "Good Afternoon!";
     else if (hour == 12)
-    this.message = "Good Noon?";
+    this.message = "Good Noon!";
     else
-    this.message = "Good Evening?";
+    this.message = "Good Evening!";
    	
     assertEquals(message,var.printMessage());
 
