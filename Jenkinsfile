@@ -6,7 +6,7 @@ pipeline {
 
   stages {
      
-    stage('Tests unitaire') {
+    stage('Tests unitaires') {
     
       steps {
         sh 'mvn test'
