@@ -20,6 +20,7 @@ pipeline {
 
         withSonarQubeEnv('SonarQube') {
           echo 'lol'
+          sleep 20
           //sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
         }
 
