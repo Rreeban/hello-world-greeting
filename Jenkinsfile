@@ -37,7 +37,7 @@ pipeline {
     stage ('Publication du binaire') {
 
       steps {
-        sh "curl -u admin:Shaymin122 --upload-file target/*war 'http://{ADRESSE_IP_SERVEUR_NEXUS}/repository/{NOM_DU_DEPOT}/rondoudou${BUILD_NUMBER}.war'"
+        sh "curl -u admin:Shaymin122 --upload-file target/*war 'http://84.39.43.46:8081/repository/{NOM_DU_DEPOT}/rondoudou${BUILD_NUMBER}.war'"
       }
 
     }
