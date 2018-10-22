@@ -89,7 +89,7 @@ pipeline {
           
           steps {
             sh 'wget -P /home/jenkins/docker/tomcat_app http://84.39.47.231:8081/repository/hello_fiable/rondoudou_fiable${BUILD_NUMBER}.war'
-            sh 'mv /home/jenkins/docker/tomcat_app/ rondoudou_fiable${BUILD_NUMBER}.war /home/jenkins/docker/tomcat_app/rondoudou.war'
+            sh 'mv /home/jenkins/docker/tomcat_app/rondoudou_fiable${BUILD_NUMBER}.war /home/jenkins/docker/tomcat_app/rondoudou.war'
           }
           
         }
